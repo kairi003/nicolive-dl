@@ -16,7 +16,7 @@ from .exceptions import *
 NicoLiveInfo = namedtuple('NicoLiveInfo', 'lvid title web_socket_url')
 
 
-class NicoLiveDl:
+class NicoLiveDL:
     def __init__(self):
         self.ses = Session()
 

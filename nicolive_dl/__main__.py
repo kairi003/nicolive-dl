@@ -4,10 +4,10 @@
 import asyncio
 from getpass import getpass
 
-from . import NicoLiveDl
+from . import NicoLiveDL
 
 async def _main():
-    nldl = NicoLiveDl()
+    nldl = NicoLiveDL()
     nldl.login(input('Account: '), getpass('Password: '))
     lvid = input('Live Id: ')
     print(await nldl.get_info(lvid))

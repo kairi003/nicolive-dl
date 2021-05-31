@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from .nicolive_dl import NicoLiveDl, NicoLiveInfo
+from .nicolive_dl import NicoLiveDL, NicoLiveInfo
 from .nicolive_ws import NicoLiveWS, WebSocketApp
 from .exceptions import *
 
@@ -12,4 +12,4 @@ __author__       = 'kairi'
 __author_email__ = 'kairi.satellite@gmail.com'
 __url__          = 'https://github.com/kairi003/svg2ico'
 
-__all__ = ['NicoLiveDl', 'NicoLiveWS', 'WebSocketApp', 'NicoLiveInfo', 'LoginError', 'SelectException']
+__all__ = ['NicoLiveDL', 'NicoLiveWS', 'WebSocketApp', 'NicoLiveInfo', 'LoginError', 'SelectException']
