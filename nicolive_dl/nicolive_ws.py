@@ -7,9 +7,10 @@ import asyncio
 import logging
 import websockets
 
-wslogger = logging.getLogger('websockets')
-wslogger.setLevel(logging.INFO)
-wslogger.addHandler(logging.StreamHandler())
+# wslogger = logging.getLogger('websockets')
+# wslogger.setLevel(logging.DEBUG)
+# wslogger.addHandler(logging.StreamHandler())
+# wslogger.addHandler(logging.FileHandler('log.txt'))
 # LogLevelをDEBUGにすると通信情報を表示
 
 class WebSocketApp:
@@ -58,7 +59,7 @@ class NicoLiveWS(WebSocketApp):
             "type": "startWatching",
             "data": {
                 "stream": {
-                    "quality": "abr",
+                    "quality": "super_high",
                     "protocol": "hls",
                     "latency": "low",
                     "chasePlay": False

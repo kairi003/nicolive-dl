@@ -3,6 +3,7 @@
 
 import json
 import asyncio
+from enum import Enum
 from pathlib import Path
 from urllib.parse import unquote
 from collections import namedtuple
@@ -27,7 +28,7 @@ class NicoLiveDL:
         if res.url != 'https://account.nicovideo.jp/my/account':
             raise LoginError('Failed to Login')
 
-    async def download(self, lvid, output='{title}-{lvid}.mp4'):
+    async def download(self, lvid, output='{title}-{lvid}.ts'):
         lvid, title, web_socket_url = await self.get_info(lvid)
         title = sanitize(title)
         output_path = Path(output.format(title=title, lvid=lvid))
