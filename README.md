@@ -5,4 +5,8 @@
 
 pipでインストールできるはずです。
 
+```bash
+pip install git+https://github.com/kairi003/nicolive-dl
+```
 
+別途ffmpegをインストールしてPATHを通しておく必要があります。
