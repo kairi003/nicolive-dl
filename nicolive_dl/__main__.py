@@ -10,7 +10,6 @@ async def _main():
     nldl = NicoLiveDL()
     nldl.login(input('Account: '), getpass('Password: '))
     lvid = input('Live Id: ')
-    print(await nldl.get_info(lvid))
     await nldl.download(lvid)
 
 def main():
