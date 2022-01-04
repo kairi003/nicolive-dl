@@ -1,9 +1,9 @@
 # nicolive-dl
-ニコ生ダウンローダーです。
+ニコ生タイムシフトダウンローダーです。
 
 現状タイムシフトを想定していますが普通の生放送でも動くかも。
 
-pipでインストールできるはずです。
+GitHubからpipでインストールできます。
 
 ```bash
 pip install git+https://github.com/kairi003/nicolive-dl
