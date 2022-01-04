@@ -10,6 +10,6 @@ __version__      = '0.1.1'
 __license__      = 'MIT'
 __author__       = 'kairi'
 __author_email__ = 'kairi.satellite@gmail.com'
-__url__          = 'https://github.com/kairi003/svg2ico'
+__url__          = 'https://github.com/kairi003/nicolive-dl'
 
 __all__ = ['NicoLiveDL', 'NicoLiveWS', 'WebSocketApp', 'NicoLiveInfo', 'LoginError', 'SelectException']
