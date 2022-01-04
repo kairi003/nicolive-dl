@@ -6,7 +6,7 @@ from .nicolive_ws import NicoLiveWS, WebSocketApp
 from .exceptions import *
 
 __copyright__    = 'Copyright (C) 2020 kairi'
-__version__      = '0.1.2'
+__version__      = '0.1.3'
 __license__      = 'MIT'
 __author__       = 'kairi'
 __author_email__ = 'kairi.satellite@gmail.com'
