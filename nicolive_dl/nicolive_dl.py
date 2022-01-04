@@ -44,7 +44,7 @@ class NicoLiveDL:
         stream_uri = await nlws.wait_for_stream()
         output_path.parent.mkdir(parents=True, exist_ok=True)
         args = ['-y', '-i', stream_uri, '-c', 'copy', output_path]
-        proc = await asyncio.subprocess.create_subprocess_exec('ffmpeg', *args)
+        proc = await asyncio.create_subprocess_exec('ffmpeg', *args)
         await proc.communicate()
         await nlws.close()
 

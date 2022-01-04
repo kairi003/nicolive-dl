@@ -34,17 +34,10 @@ class WebSocketApp:
         await self.on_close()
         await self.ws.close()
 
-    async def on_open(self):
-        pass
-
-    async def on_send(self, data):
-        pass
-
-    async def on_recv(self, msg):
-        pass
-
-    async def on_close(self):
-        pass
+    async def on_open(self): pass
+    async def on_send(self, data): pass
+    async def on_recv(self, msg): pass
+    async def on_close(self): pass
 
 
 class NicoLiveWS(WebSocketApp):
