@@ -46,6 +46,8 @@ class NicoLiveWS(WebSocketApp):
         self.keep_interval_sec = None
         self.stream_uri = None
         self.recv_stream_event = asyncio.Event()
+        self.room = None
+        self.recv_room_event = asyncio.Event()
 
     async def on_open(self):
         start_watching = {
@@ -77,6 +79,8 @@ class NicoLiveWS(WebSocketApp):
             asyncio.create_task(self.heart_start(data))
         elif t == 'stream':
             asyncio.create_task(self.recv_stream(data))
+        elif t == 'room':
+            asyncio.create_task(self.recv_room(data))
 
     async def pong(self):
         await self.send({"type": "pong"})
@@ -98,3 +102,38 @@ class NicoLiveWS(WebSocketApp):
     async def wait_for_stream(self):
         await self.recv_stream_event.wait()
         return self.stream_uri
+    
+    async def recv_room(self, data):
+        self.room = data
+        self.recv_room_event.set()
+
+    async def wait_for_room(self):
+        await self.recv_room_event.wait()
+        return self.room
+
+class NicoLiveCommentWS(WebSocketApp):
+    def __init__(self, room_event, comment_path, **kwargs):
+        uri = room_event['data']['messageServer']['uri']
+        super().__init__(uri, **kwargs)
+        self.roomEvent = room_event
+        self.commentPath = comment_path
+        asyncio.create_task(self.heart_start())
+
+    async def on_open(self):
+        message = [{"ping": {"content": "rs:0"}}, {"ping": {"content": "ps:0"}}, {
+            "thread": {"thread": self.roomEvent['data']['threadId'], "version": "20061206", "user_id": "10000",
+                       "res_from": -150, "with_global": 1, "scores": 1, "nicoru": 0,
+                       "threadkey": self.roomEvent['data']['yourPostKey']}},
+                   {"ping": {"content": "pf:0"}}, {"ping": {"content": "rf:0"}}]
+        await self.send(message)
+
+    async def heart_start(self):
+        await asyncio.sleep(60)
+        next_time = time.time()
+        while True:
+            await self.send('')
+            next_time += 60
+            await asyncio.sleep(max(next_time - time.time(), 0))
+
+    async def on_recv(self, msg):
+        open(self.commentPath, 'a', encoding='utf-8').write(msg + '\n')

@@ -32,6 +32,8 @@ class NicoLiveDL:
         lvid, title, web_socket_url = await self.get_info(lvid)
         title = sanitize(title)
         output_path = Path(output.format(title=title, lvid=lvid))
+        comment_output_path = output_path.parent / (output_path.stem + '.jsonl')
+
         if output_path.exists():
             while True:
                 ans = input(f'Can you overwrite {output_path}? [y/n]')
@@ -41,6 +43,9 @@ class NicoLiveDL:
                     return
         nlws = NicoLiveWS(web_socket_url)
         asyncio.create_task(nlws.connect())
+        room_event = await nlws.wait_for_room()
+        comment_ws = NicoLiveCommentWS(room_event, comment_output_path)
+        asyncio.create_task(comment_ws.connect())
         stream_uri = await nlws.wait_for_stream()
         output_path.parent.mkdir(parents=True, exist_ok=True)
         args = ['-y', '-i', stream_uri, '-c', 'copy', output_path]
