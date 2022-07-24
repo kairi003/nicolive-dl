@@ -10,7 +10,7 @@ from collections import namedtuple
 from requests import Session
 from bs4 import BeautifulSoup, Tag
 from sanitize_filename import sanitize
-from .nicolive_ws import NicoLiveWS
+from .nicolive_ws import NicoLiveWS, NicoLiveCommentWS
 from .exceptions import *
 
 
