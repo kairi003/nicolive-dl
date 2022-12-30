@@ -25,7 +25,12 @@ class NicoLiveDL:
         payload = {'mail_tel': username, 'password': password}
         login_url = 'https://account.nicovideo.jp/login/redirector'
         res = self.ses.post(login_url, data=payload)
-        if res.url != 'https://account.nicovideo.jp/my/account':
+        #check email for otp
+        otp = input('OTP: ')
+        payload2 = {'otp': otp, 'loginBtn': 'Login', 'is_mfa_trusted_device': 'true', 'device_name': 'nicolivedl'}
+        otp_url = res.url
+        res2 = self.ses.post(otp_url, data=payload2)
+        if res2.url != 'https://account.nicovideo.jp/my/account':
             raise LoginError('Failed to Login')
 
     async def download(self, lvid, output='{title}-{lvid}.ts'):
