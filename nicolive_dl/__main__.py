@@ -21,7 +21,7 @@ def parse_args():
     parser.add_argument(
         "-l",
         "--live-id",
-        help="Live ID. lv0123456789 if the Live URL is https://live.nicovideo.jp/watch/lv0123456789",
+        help="Live ID or Live URL. Valid format of Live URL: https://live.nicovideo.jp/watch/lv0123456789, lv0123456789 is the Live ID in this case",
     )
     parser.add_argument(
         "--otp-required",

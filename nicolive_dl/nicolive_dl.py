@@ -14,6 +14,8 @@ from sanitize_filename import sanitize
 from .exceptions import *
 from .nicolive_ws import NicoLiveCommentWS, NicoLiveWS
 
+LIVE_URL_PREFIX = "https://live.nicovideo.jp/watch/"
+
 NicoLiveInfo = namedtuple("NicoLiveInfo", "lvid title web_socket_url")
 
 
@@ -40,6 +42,8 @@ class NicoLiveDL:
                 raise LoginError("Failed to Login")
 
     async def download(self, lvid, output="{title}-{lvid}.ts", save_comments=False):
+        if lvid.startswith(LIVE_URL_PREFIX):
+            lvid = lvid[len(LIVE_URL_PREFIX) :]
         lvid, title, web_socket_url = await self.get_info(lvid)
         title = sanitize(title)
         output_path = Path(output.format(title=title, lvid=lvid))
@@ -68,7 +72,7 @@ class NicoLiveDL:
         await nlws.close()
 
     async def get_info(self, lvid):
-        res = self.ses.get(f"https://live.nicovideo.jp/watch/{lvid}")
+        res = self.ses.get(f"{LIVE_URL_PREFIX}{lvid}")
         res.raise_for_status()
         soup = BeautifulSoup(res.content, "html.parser")
         embedded_tag = soup.select_one("#embedded-data")
