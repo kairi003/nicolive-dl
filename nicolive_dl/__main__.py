@@ -5,7 +5,7 @@ import argparse
 import asyncio
 from getpass import getpass
 
-from . import NicoLiveDL
+from . import LIVE_URL_PREFIX, NicoLiveDL
 
 
 async def _main(username, password, live_id, otp_required, save_comments):
@@ -21,7 +21,7 @@ def parse_args():
     parser.add_argument(
         "-l",
         "--live-id",
-        help="Live ID. lv0123456789 if the Live URL is https://live.nicovideo.jp/watch/lv0123456789",
+        help=f"Live ID or Live URL. Valid format of Live URL: {LIVE_URL_PREFIX}lv0123456789, lv0123456789 is the Live ID in this case",
     )
     parser.add_argument(
         "--otp-required",
