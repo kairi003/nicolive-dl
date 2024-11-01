@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nicolive-dl"
+version = "0.2.0"
+description = "NicoLive Downloader"
+requires-python = ">=3.9"
+authors = [
+    { name = "kairi003", email = "kairi.satellite@gmail.com" },
+    { name = "zhyu" },
+    { name = "DeltaFlyerW" },
+    { name = "Negima1072" },
+    { name = "woonie" },
+]
+maintainers = [{ name = "kairi003", email = "kairi.satellite@gmail.com" }]
+license = { file = "LICENSE" }
+readme = "README.md"
+keywords = [
+    "nicovideo",
+    "nicovideo.jp",
+    "live.nicovideo.jp",
+    "nicolive",
+    "niconico",
+    "downloader",
+]
+dependencies = [
+    "beautifulsoup4",
+    "lxml",
+    "requests",
+    "sanitize-filename",
+    "websockets",
+]
+
+[project.urls]
+Homepage = "https://github.com/kairi003/nicolive-dl"
+Repository = "https://github.com/kairi003/nicolive-dl"
+
+[project.scripts]
+nicolive_dl = "nicolive_dl.__main__:main"
+nicolive-dl = "nicolive_dl.__main__:main"
